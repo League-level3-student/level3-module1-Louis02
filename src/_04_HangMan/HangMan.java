@@ -11,6 +11,13 @@ import javax.swing.JPanel;
 
 public class HangMan implements KeyListener {
 	Stack<String> words = new Stack<String>();
+	String using;
+	int stringLength;
+	int lives;
+	JLabel label = new JLabel();
+	JLabel llabel = new JLabel();
+	String line = "";
+	JPanel panell = new JPanel();
 
 	public static void main(String[] args) {
 		HangMan hangMan = new HangMan();
@@ -34,42 +41,45 @@ public class HangMan implements KeyListener {
 				i--;
 			}
 		}
-		String using = words.pop();
-		int lives = 10;
-		int stringLength = using.length();
-		String line = "";
-
-		JPanel panel = new JPanel();
-		JFrame frame = new JFrame();
-		JLabel label = new JLabel();
-
-		frame.add(panel);
-		panel.add(label);
-		frame.setVisible(true);
-		frame.addKeyListener(this);
-
-		for (int i = 0; i < stringLength; i++) {
-			line = (line + "-");
-		}
-
-		label.setText(line + "   You have " + lives + " more lives");
-
-		frame.pack();
+		setup();
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-
+		char keyTyped;
+		String results = "";
+		for (int i = 0; i < line.length(); i++) {
+			keyTyped = e.getKeyChar();
+			if (keyTyped == using.charAt(i)) {
+				results += using.charAt(i);
+			} else {
+				results += line.charAt(i);
+				lives--;
+			}
+//			if(lives<=0) {
+//				int choice = JOptionPane.showConfirmDialog(null, "Do you want to play again?", "Yes or No", JOptionPane.YES_NO_OPTION, 0);
+//				if(choice == JOptionPane.YES_OPTION) {
+//					
+//				}
+//			}
+if (line.equals(using)&&words.isEmpty()==false) {
+			words.pop();
+			lives = 10;
+			line="";
+			using="";
+			setup();
+		}
+		}
+		line = results;
+		
+		label.setText(line);
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-	for(int i = 0; i<10;i++) {
-		
-	}
-	
+
 	}
 
 	@Override
@@ -77,4 +87,29 @@ public class HangMan implements KeyListener {
 		// TODO Auto-generated method stub
 
 	}
+	public void setup() {
+		using = words.pop();
+		lives = 10;
+		stringLength = using.length();
+
+		JPanel panel = new JPanel();
+		JFrame frame = new JFrame();
+		frame.add(panell);
+		panell.add(llabel);
+		frame.add(panel);
+		panel.add(label);
+		
+		frame.setVisible(true);
+		frame.addKeyListener(this);
+
+		for (int i = 0; i < stringLength; i++) {
+			line = (line + "-");
+		}
+
+		label.setText(line);
+		llabel.setText("You have " + lives + " lives left");
+
+		frame.pack();
+	}
+
 }

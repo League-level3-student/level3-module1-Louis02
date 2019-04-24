@@ -77,12 +77,12 @@ ethical
 excellent
 exciting
 exquisite
-fabulous
-fair
-familiar
-famous
-fantastic
-favorable
+afbulous
+afir
+afmiliar
+afmous
+afntastic
+afvorable
 fetching
 fine
 fitting
@@ -204,7 +204,7 @@ rewarding
 right
 robust
 safe
-satisfactory
+satisafctory
 secure
 seemly
 simple
