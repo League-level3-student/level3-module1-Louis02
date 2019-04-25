@@ -25,6 +25,64 @@ public class HangMan implements KeyListener {
 	}
 
 	public HangMan() {
+		restart();
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		char keyTyped;
+		String results = "";
+		for (int i = 0; i < line.length(); i++) {
+			keyTyped = e.getKeyChar();
+			if (keyTyped == using.charAt(i)) {
+				results += using.charAt(i);
+			} else {
+				results += line.charAt(i);
+			lives --;
+			System.out.println(lives);
+			}
+//			if(lives<=0) {
+//				int choice = JOptionPane.showConfirmDialog(null, "Do you want to play again?", "Yes or No", JOptionPane.YES_NO_OPTION, 0);
+//				if(choice == JOptionPane.YES_OPTION) {
+//					
+//				}
+//			}
+
+		}
+		line = results;
+		if(lives <= 0) {
+			line = "";
+			using = "";
+			using = "";
+			restart();
+		}
+		if (line.equals(using)) {
+			//words.pop();
+			lives = 100;
+			line="";
+			using="";
+			if(words.isEmpty()==true) {
+				JOptionPane.showMessageDialog(null, "You are done");
+			}
+			setup();
+			System.out.println("ssss");
+		}
+		label.setText(line);
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+	public void restart() {
 		String stringInput = JOptionPane.showInputDialog("How many words would you like to guess?");
 		int input = Integer.parseInt(stringInput);
 		if (input < 1 || input > 266) {
@@ -42,50 +100,6 @@ public class HangMan implements KeyListener {
 			}
 		}
 		setup();
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		char keyTyped;
-		String results = "";
-		for (int i = 0; i < line.length(); i++) {
-			keyTyped = e.getKeyChar();
-			if (keyTyped == using.charAt(i)) {
-				results += using.charAt(i);
-			} else {
-				results += line.charAt(i);
-				lives--;
-			}
-//			if(lives<=0) {
-//				int choice = JOptionPane.showConfirmDialog(null, "Do you want to play again?", "Yes or No", JOptionPane.YES_NO_OPTION, 0);
-//				if(choice == JOptionPane.YES_OPTION) {
-//					
-//				}
-//			}
-if (line.equals(using)&&words.isEmpty()==false) {
-			words.pop();
-			lives = 10;
-			line="";
-			using="";
-			setup();
-		}
-		}
-		line = results;
-		
-		label.setText(line);
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 	public void setup() {
 		using = words.pop();
