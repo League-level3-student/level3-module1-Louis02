@@ -18,6 +18,7 @@ public class HangMan implements KeyListener {
 	JLabel llabel = new JLabel();
 	String line = "";
 	JPanel panell = new JPanel();
+	int transfer;
 
 	public static void main(String[] args) {
 		HangMan hangMan = new HangMan();
@@ -39,16 +40,12 @@ public class HangMan implements KeyListener {
 				results += using.charAt(i);
 			} else {
 				results += line.charAt(i);
-			lives --;
+			transfer=1;
 			System.out.println(lives);
 			}
-//			if(lives<=0) {
-//				int choice = JOptionPane.showConfirmDialog(null, "Do you want to play again?", "Yes or No", JOptionPane.YES_NO_OPTION, 0);
-//				if(choice == JOptionPane.YES_OPTION) {
-//					
-//				}
-//			}
-
+		}
+		if(transfer==1) {
+			lives--;
 		}
 		line = results;
 		if(lives <= 0) {
@@ -59,7 +56,7 @@ public class HangMan implements KeyListener {
 		}
 		if (line.equals(using)) {
 			//words.pop();
-			lives = 100;
+			lives = 10;
 			line="";
 			using="";
 			if(words.isEmpty()==true) {
