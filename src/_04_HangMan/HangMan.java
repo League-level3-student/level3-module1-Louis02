@@ -18,7 +18,8 @@ public class HangMan implements KeyListener {
 	JLabel llabel = new JLabel();
 	String line = "";
 	JPanel panell = new JPanel();
-	int transfer;
+	boolean transfer;
+	int choice;
 
 	public static void main(String[] args) {
 		HangMan hangMan = new HangMan();
@@ -34,38 +35,64 @@ public class HangMan implements KeyListener {
 		// TODO Auto-generated method stub
 		char keyTyped;
 		String results = "";
+		transfer = false;
 		for (int i = 0; i < line.length(); i++) {
+
 			keyTyped = e.getKeyChar();
 			if (keyTyped == using.charAt(i)) {
 				results += using.charAt(i);
+				transfer = true;
 			} else {
 				results += line.charAt(i);
-			transfer=1;
-			System.out.println(lives);
+
 			}
+
 		}
-		if(transfer==1) {
+
+		if (transfer == false) {
 			lives--;
 		}
+		System.out.println(lives);
 		line = results;
-		if(lives <= 0) {
+		if (lives < 1) {
 			line = "";
 			using = "";
+			Question();
+		}
+
+		label.setText(line);
+		if (line.equals(using)) {
+
+			
+			lives = 10;
+			line = "";
 			using = "";
+			if (words.isEmpty() == true) {
+				Question();
+			}
+			else {
+				setup();
+			}
+		}
+
+	}
+
+	public void Question() {
+
+		if (words.isEmpty() == true) {
+			choice = JOptionPane.showOptionDialog(null, "Do you want to play again", "Choice",
+					JOptionPane.YES_NO_OPTION, 0, null, null, 0);
+			// 0 yes 1 no
+
+		}
+		else if (lives<=0) {
+			choice = JOptionPane.showOptionDialog(null, "Do you want to play again", "Choice",
+					JOptionPane.YES_NO_OPTION, 0, null, null, 0);
+		}
+		if (choice == 0) {
 			restart();
 		}
-		if (line.equals(using)) {
-			//words.pop();
-			lives = 10;
-			line="";
-			using="";
-			if(words.isEmpty()==true) {
-				JOptionPane.showMessageDialog(null, "You are done");
-			}
-			setup();
-			System.out.println("ssss");
-		}
-		label.setText(line);
+
 	}
 
 	@Override
@@ -79,6 +106,7 @@ public class HangMan implements KeyListener {
 		// TODO Auto-generated method stub
 
 	}
+
 	public void restart() {
 		String stringInput = JOptionPane.showInputDialog("How many words would you like to guess?");
 		int input = Integer.parseInt(stringInput);
@@ -98,6 +126,7 @@ public class HangMan implements KeyListener {
 		}
 		setup();
 	}
+
 	public void setup() {
 		using = words.pop();
 		lives = 10;
@@ -109,7 +138,7 @@ public class HangMan implements KeyListener {
 		panell.add(llabel);
 		frame.add(panel);
 		panel.add(label);
-		
+
 		frame.setVisible(true);
 		frame.addKeyListener(this);
 
