@@ -18,6 +18,7 @@ public class _02_LogSearch implements ActionListener {
 	JButton button2 = new JButton();
 	JButton button3 = new JButton();
 	JButton button4 = new JButton();
+	
 	int ID;
 	int IDCheck;
 
@@ -50,6 +51,7 @@ public class _02_LogSearch implements ActionListener {
 			String id = JOptionPane.showInputDialog("Create an ID Number");
 			ID = Integer.parseInt(id);
 			String name = JOptionPane.showInputDialog("Enter a name");
+			String pass = JOptionPane.showInputDialog("Please create a password");
 			logSearch.put(ID, name);
 		}
 		if (button2 == e.getSource()) {
@@ -64,15 +66,15 @@ public class _02_LogSearch implements ActionListener {
 			}
 		}
 		if (button3 == e.getSource()) {
-			String v = "";
+			//String v = "";
 			for (Integer i : logSearch.keySet()) {
 
-				for (int q = 0; i < logSearch.size(); i++) {
-					v += "ID: " + i + " Name: " + logSearch.get(i) + "\n";
+				//for (int q = 0; i < logSearch.size(); i++) {
+				JOptionPane.showMessageDialog(null,  "ID: " + i + " Name: " + logSearch.get(i) + "\n");
 				}
 				
-			}
-JOptionPane.showMessageDialog(null, v);
+			
+
 		}
 		if (button4 == e.getSource()) {
 			String removee = JOptionPane.showInputDialog("Enter an ID");
