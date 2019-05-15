@@ -51,7 +51,7 @@ public class _02_LogSearch implements ActionListener {
 			String id = JOptionPane.showInputDialog("Create an ID Number");
 			ID = Integer.parseInt(id);
 			String name = JOptionPane.showInputDialog("Enter a name");
-			String pass = JOptionPane.showInputDialog("Please create a password");
+			
 			logSearch.put(ID, name);
 		}
 		if (button2 == e.getSource()) {
